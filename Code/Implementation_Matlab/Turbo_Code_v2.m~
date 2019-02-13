@@ -61,7 +61,7 @@ BER = zeros(length(n_iter), length(EbNo_range));
 
 % AWGN Channel
 Pn = 10.^((-EbNo_range - 3)/10);
-nt = sqrt(Pn)' * randn(1, length(x)); 
+nt = sqrt(Pn) .* randn(1, length(x)); 
 
 
 % counters
@@ -70,15 +70,15 @@ c_iter = 1;
 
 for n_it = n_iter
 
-    for Eb = EbNo_range
+    for nt_ite = nt
         
         % Initialization of the probabilities
         L_u1 = zeros(L,1);
         L_c = zeros(length(c1),1);
         
         
-        rt = nt(c_ebno,:)' + x; % received signal
-        y_Lch = (2/Pn(c_ebno))*rt; % L-value for BPSK
+        rt = nt_ite' + x; % received signal
+        y_Lch = (2/Pn)*rt; % L-value for BPSK
 
         for i=1:n_it
             % inner decoder 
