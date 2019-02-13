@@ -114,16 +114,20 @@ for n_it = n_iter
 
 end 
 figure
-semilogy(EbNo_range,BER(1,:))
-xlabel('Eb/No')
+semilogy(EbNo_range,BER(3,:))
+xlabel('Eb/No in dB')
 ylabel('BER')
 grid on
 hold on
-semilogy(EbNo_range,BER(2,:))
-semilogy(EbNo_range,BER(3,:))
 semilogy(EbNo_range,BER(4,:))
 semilogy(EbNo_range,BER(5,:))
 semilogy(EbNo_range,BER(6,:))
 semilogy(EbNo_range,BER(7,:))
-legend('1 iterations', '2 iterations', '3 iterations', '4 iterations', '5 iterations', '6 iterations', '7 iterations' )
+semilogy(EbNo_range,BER(9,:))
+semilogy(EbNo_range,BER(16,:))
+legend('3 iterations', '4 iterations', '5 iterations', '6 iterations','7 iterations', '9 iterations', '16 iterations' )
+
+dlmwrite('Eb_No.dat', EbNo_range)
+dlmwrite('BER.dat', BER)
+
 
