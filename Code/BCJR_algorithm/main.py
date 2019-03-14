@@ -16,9 +16,6 @@ import matplotlib.pyplot as plt
 
 
 
-
-
-
 L=2500
 M=3
 

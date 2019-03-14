@@ -11,12 +11,6 @@ import numpy as np
 
 
 
-
-
-
-
-
-
 def Encoder1(inp,state):
     inp_m1=(np.bitwise_and(state,4))>>2
     inp_m2=(np.bitwise_and(state,2))>>1

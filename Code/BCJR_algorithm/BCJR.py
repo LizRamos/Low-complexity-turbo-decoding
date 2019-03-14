@@ -3,13 +3,7 @@
 """
 Created on Tue Jan 29 19:47:52 2019
 
-@author: root
-
-Le BCJR ne s'occupe pas du turbo-code dans son intégralité
-mais seulement d'une des étapes du décodage. Il prend en entrée 
-la sortie d'un des codeurs convolutifs.
-
-      
+@author: root      
 """
 
 import numpy as np
