@@ -28,10 +28,8 @@ class Turbo_Decoder():
     def decode(self,received_message,sigma2):
         decoder1=BCJR_D1(self.treillis)
         decoder2=BCJR_D2(self.treillis)
-        decoded_messages=np.zeros([self.nbIterations,self.L+1])
+        decoded_messages=np.zeros([self.nbIterations,self.L+1],dtype='int')
         LLR21ord=[-99]+self.L*[0]
-        
-        
         for iteration in range(self.nbIterations):
             decoder1.compute_gamma_mat(received_message,self.permutation,LLR21ord,sigma2)
             decoder1.compute_alpha_mat()
@@ -45,27 +43,15 @@ class Turbo_Decoder():
 
             decoded_message1=[-99]+[int(lr) for lr in 0.5*(np.sign(LLR1)[1:]+1)]
             decoded_messages[iteration]=decoded_message1    
-            ##############################################################################
                     
             decoder2.compute_gamma_mat(received_message,self.permutation,LLR12perm,sigma2)
             decoder2.compute_alpha_mat()
             decoder2.compute_beta_mat()
-            
-            
+
             LLR21=decoder2.compute_extrinsic_LLR(received_message,self.treillis,
                                                  self.permutation,sigma2)
-            
 
-            
-            LLR21previous=LLR21ord
+
             LLR21ord=Interleave(LLR21,self.reverse_permutation)
-            diffLLR21_2=np.square(np.subtract(LLR21ord[1:],LLR21previous[1:]))
-            print(np.mean(np.floor(LLR21ord)))
-            LLR1exp=np.exp(LLR1[1:])
-            Mi=np.sum([diffLLR21_2[k]/LLR1exp[k] for k in range(self.L)])
-            if (iteration==0):
-                M1=Mi
-            if (iteration!=0 and Mi<0.01*M1):
-                break
-            print(iteration,Mi)
+        
         return decoded_messages

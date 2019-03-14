@@ -11,10 +11,6 @@ import numpy as np
 import random as rd
 
 
-
-
-
-
 class Channel():
     def __init__(self,sigma2):
         self.sigma2=sigma2

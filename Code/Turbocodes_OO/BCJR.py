@@ -5,11 +5,6 @@ Created on Tue Jan 29 19:47:52 2019
 
 @author: root
 
-
-
-!!!!!!!!!!!! Une seule méthode gamma_tilde (construction du tableau)
-!!!!!!!!!!!! et une méthode compute_gamma pour les deux codeurs.
-!!!!!!!!!!!! chacun doit faire appel à sa version de la méthode via l'héritage
 """
 
 import numpy as np
@@ -140,8 +135,7 @@ class BCJR_D1(BCJR):
 
     def compute_beta_mat(self):
         
-        #!!!!!!!!!!!Modification cause encodeur RSC impossible à réinitialiser
-        
+        #Modification cause encodeur RSC impossible à réinitialiser
        # self.beta_mat[0][self.L]=0
 #        for state in range(1,self.nbStates):
 #            self.beta_mat[state][self.L]=-np.inf

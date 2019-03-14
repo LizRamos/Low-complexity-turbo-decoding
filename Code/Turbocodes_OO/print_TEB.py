@@ -19,7 +19,7 @@ def execute(TEB,SNR_range):
     S=["SNR"]
     for j in range(p):
         S+=["it"+str(j)]
-    print(S)
+    #print(S)
     tab[0,:]=S
 
     tab_str=np.zeros([n+1,p+1])
@@ -29,7 +29,7 @@ def execute(TEB,SNR_range):
     for i in range(n+1):
         for j in range(p+1):
             tab_str[i][j]=len(str(tab[i][j]))
-    print(tab_str)
+  #  print(tab_str)
     columns_size=np.max(tab_str,0)
     
 
@@ -44,10 +44,3 @@ def execute(TEB,SNR_range):
     f.close()
     
     
-#
-#TEB=np.array([[0.12233333,0.6232,0.93994,0.3333],
-#              [0.3333,0.232,0.361994,0.6545545545],
-#              [0.3333,0.232,0.361994,0.6545545545],
-#              [0.54533333,0.25532,0.53994,0.9545]])
-#
-#execute(TEB,np.linspace(-5,-3,4))

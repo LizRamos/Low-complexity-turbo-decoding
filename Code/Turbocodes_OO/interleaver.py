@@ -35,13 +35,3 @@ def Interleave(word,permutation):
 def deInterleave(word,permutation):
     return Interleave(word,Interleaver_Reverse_Permutation(permutation))
 
-
-#r=[-99, 11, 22, 33, 44, 55, 66]
-#dr=[]
-#p=[1,0,3,5,2,4]
-#
-#
-#
-#print(Interleave(r,p))
-#intrlv=Interleave(r,p)
-#print(deInterleave(intrlv,p))

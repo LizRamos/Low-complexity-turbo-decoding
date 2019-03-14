@@ -10,11 +10,6 @@ import numpy as np
 import random as rd
 from interleaver import Interleave
 
-
-
-
-
-
 class Encoder():
 
     def __init__(self,M):
@@ -29,7 +24,7 @@ class Encoder():
             entry=[]
             for inp in [0,1]:
                 outp,nextState=self.out(inp,state)    
-                #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 outp=[2*outp[0]-1,2*outp[1]-1]
                 entry+=[[state,nextState,outp]]
             tableau+=[entry]
@@ -58,7 +53,7 @@ class Encoder():
             bit2,state1=self.out(bit1,state1)
             bit3,state2=self.out(bit11,state2)
             bit2,bit3=bit2[1],bit3[1]
-            #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             codeword= [2*bit1-1,2*bit2-1,2*bit3-1]
             res+=[codeword]
         return res
@@ -67,7 +62,6 @@ class Encoder():
 class UMTS_Encoder(Encoder):
     
     def __init__(self):
-        super()
         self.M=3
  
 
@@ -82,6 +76,3 @@ class UMTS_Encoder(Encoder):
         
         return [inp,Zi],nextState
     
-    def TableauTransition(self):
-        return super().TableauTransition()
-

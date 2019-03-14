@@ -17,24 +17,25 @@ import numpy as np
 import random as rd
 
 
-
-
-
-nbIterations=100
-nbTrials=1
+nbIterations=12
+nbTrials=50
 encoder=UMTS_Encoder()
 
-EB_N0_db_range= np.linspace(-3.5,-4,1)
+EB_N0_db_range= np.linspace(-4,-2.5,4)
 TEB=np.zeros([len(EB_N0_db_range),nbIterations])
 EB_N0_index=0
 for EB_N0_db in EB_N0_db_range:
     
     EB_N0=10**(EB_N0_db/10)
     sigma2=1/(2*EB_N0)
+    TEB_vec_trial=np.zeros([nbIterations])
     
-    TEB_vec_trial=np.zeros([nbIterations,nbTrials])
-    for trial in range(nbTrials):
-        message=[-99]+[rd.randint(0,1) for k in range(20)]+[0,0,0,0,0,0,0,1]
+    trial=0
+    nbErrors=0
+    while(trial<nbTrials):
+	print(EB_N0_index,trial,nbErrors)
+	trial+=1
+        message=[-99]+[rd.randint(0,1) for k in range(350)]+[0,0,0,0,0,0,0,1]
         L=len(message)-1
         permutation=np.arange(L)
         rd.shuffle(permutation)
@@ -43,16 +44,17 @@ for EB_N0_db in EB_N0_db_range:
         received_message=C.addNoise(encoded_message)
         decoder=Turbo_Decoder(encoder,permutation,L,nbIterations)
         decoded_messages=decoder.decode(received_message,sigma2)
-        #print(decoded_messages)
-        
-        for iteration in range(nbIterations):
-            TEB_vec_trial[iteration][trial]=np.sum(
-                    [message[i]!=decoded_messages[iteration][i] 
-                    for i in range(1,L+1)])/L
-    
-    TEB[EB_N0_index]=np.mean(TEB_vec_trial,1)
-    EB_N0_index+=1
 
+        for iteration in range(nbIterations):
+            TEB_vec_trial[iteration]+=np.sum(np.bitwise_xor(message[1:],decoded_messages[iteration][1:]))
+            print(TEB_vec_trial[iteration])
+
+	nbErrors=TEB_vec_trial[11]
+    TEB[EB_N0_index]=TEB_vec_trial/float(L*trial)
+    print("****",EB_N0_db,TEB[EB_N0_index])
+    EB_N0_index+=1
+    
+print(TEB)
 
 execute(TEB,EB_N0_db_range)
 
