@@ -54,8 +54,4 @@ class Encoder_1315(Encoder):
     def TableauTransition(self):
         return super().TableauTransition()
 
-#
-#message=[-99]+[1,0,1,1,1,0,0,1,0,1,1,1,0,0,0]
-#E=Encoder_1315()
-#print(E.encode_message(message))
 

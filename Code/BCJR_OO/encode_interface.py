@@ -23,8 +23,6 @@ message=np.array(message)
 encoded_message=encoder.encode_message(message)
 
 serial_encoded_message=np.reshape(encoded_message[1:],len(encoded_message[1:])*2)
-#print(encoded_message[1:])
-#print(len(message),len(encoded_message[1:]))
 s=""
 for bit in serial_encoded_message:
     s+=(str(bit)+" ")
